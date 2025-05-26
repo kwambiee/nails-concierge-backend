@@ -88,4 +88,5 @@ module.exports = {
   getTechnicianBookings,
   updateBookingInfo,
   getClientBookings,
+  getAllBookings,
 };
