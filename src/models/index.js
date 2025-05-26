@@ -1,1 +1,9 @@
 module.exports.User = require("./user.model");
+module.exports.Client = require("./client.model");
+module.exports.Professional = require("./technician.model");
+module.exports.Service = require("./service.model");
+module.exports.Booking = require("./booking.model");
+module.exports.Review = require("./review.model");
+module.exports.Notification = require("./notification.model");
+module.exports.Earning = require("./earning.model");
+module.exports.Payment = require("./payment.model");

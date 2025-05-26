@@ -1,12 +1,9 @@
-const { userService, authService } = require('../services');
+const { userService } = require('../services');
 
 const signUp = async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log(email, "----email");
-        console.log(password, "----password");
         const existingUser = await userService.getUserByEmail(email);
-        console.log(existingUser, "----existingUser");
         if (existingUser) {
             return res.status(400).json({ error: "User already exists" });
         }

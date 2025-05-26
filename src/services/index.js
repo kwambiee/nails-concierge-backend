@@ -1,2 +1,10 @@
 module.exports.userService = require("./user.service");
 module.exports.authService = require("./auth.service");
+module.exports.technicianService = require("./technician.service");
+module.exports.serviceService = require("./service.service");
+module.exports.clientService = require("./client.service");
+module.exports.reviewService = require("./review.service");
+module.exports.bookingService = require("./booking.service");
+module.exports.earningService = require("./earning.service");
+module.exports.notificationService = require("./notification.service");
+module.exports.paymentService = require("./payment.service");
