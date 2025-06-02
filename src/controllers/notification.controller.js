@@ -26,7 +26,7 @@ const getNotificationById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-const updateNotificationProfile = async (req, res) => {
+const updateNotificationInfo = async (req, res) => {
   try {
     const notificationId = req.params.id;
     const notificationInfo = req.body;
@@ -50,16 +50,6 @@ const deleteNotification = async (req, res) => {
   }
 };
 
-const getUnreadNotificationsByUser = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const { notifications, totalNotifications } =
-      await notificationService.getUnreadNotificationsByUser(userId);
-    res.status(200).json({ notifications, totalNotifications });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
 const getAllUserNotifications = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -71,12 +61,12 @@ const getAllUserNotifications = async (req, res) => {
   }
 };
 
-const getNotificationsByType = async (req, res) => {
+const getNotificationsByStatus = async (req, res) => {
   try {
     const userId = req.user.id;
-    const type = req.params.type;
+    const status = req.body.status;
     const { notifications, totalNotifications } =
-      await notificationService.getNotificationsByType(userId, type);
+      await notificationService.getNotificationsByStatus(userId, status);
     res.status(200).json({ notifications, totalNotifications });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -85,10 +75,9 @@ const getNotificationsByType = async (req, res) => {
 
 module.exports = {
   createNotification,
-  updateNotificationProfile,
+  updateNotificationInfo,
   deleteNotification,
   getNotificationById,
-  getUnreadNotificationsByUser,
   getAllUserNotifications,
-  getNotificationsByType,
+  getNotificationsByStatus,
 };

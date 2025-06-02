@@ -15,6 +15,11 @@ const notificationSchema = new mongoose.Schema(
       required: true,
     },
     relatedId: { type: mongoose.Schema.Types.ObjectId, required: true },
+    status: {
+      type: String,
+      enum: ["unread", "read"],
+      default: "unread",
+    },
   },
   { timestamps: true }
 );

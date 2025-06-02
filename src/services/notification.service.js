@@ -10,6 +10,7 @@ const createNotification = async (notificationData) => {
     read,
     type,
     relatedId,
+    status: "unread",
   });
   return newNotification;
 };
@@ -20,7 +21,7 @@ const getNotificationById = async (id) => {
 };
 
 const updateNotificationInfo = async (notificationId, notificationInfo) => {
-  const { user, message, read, type, relatedId } = notificationInfo;
+  const { user, message, read, type, relatedId, status } = notificationInfo;
   const updatedNotification = await Notification.findByIdAndUpdate(
     notificationId,
     {
@@ -40,20 +41,14 @@ const deleteNotification = async (notificationId) => {
   return deletedNotification;
 };
 
-const getUnreadNotificationsByUser = async (userId) => {
-  const notifications = await Notification.find({ user: userId, read: false });
-  const totalNotifications = await Notification.countDocuments({ user: userId, read: false });
-  return { notifications, totalNotifications };
-};
-
 const getAllUserNotifications = async (userId) => {
   const notifications = await Notification.find({ user: userId });
   const totalNotifications = await Notification.countDocuments({ user: userId });
   return { notifications, totalNotifications };
 };
-const getNotificationsByType = async (userId, type) => {
-  const notifications = await Notification.find({ user: userId, type });
-  const totalNotifications = await Notification.countDocuments({ user: userId, type });
+const getNotificationsByStatus = async (userId, status) => {
+  const notifications = await Notification.find({ user: userId, status });
+  const totalNotifications = await Notification.countDocuments({ user: userId, status });
   return { notifications, totalNotifications };
 };
 
@@ -62,7 +57,6 @@ module.exports = {
   getNotificationById,
   updateNotificationInfo,
   deleteNotification,
-  getUnreadNotificationsByUser,
   getAllUserNotifications,
-  getNotificationsByType,
+  getNotificationsByStatus,
 };
