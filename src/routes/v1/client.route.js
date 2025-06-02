@@ -1,18 +1,25 @@
-const express = require('express');
-const passport = require('passport');
-const { userController } = require("../../controllers");
+const express = require("express");
+const { clientController } = require("../../controllers");
+const authenticateJWT = require("../../middleware/authenticateJWTMiddleware");
 
 const router = express.Router();
-const auth = passport.authenticate("jwt", { session: false });
 
+// Client routes
+router
+  .route("/")
+  .post(authenticateJWT, clientController.createClient)
+  .get(authenticateJWT, clientController.getAllClients);
 
+router
+  .route("/:id")
+  .get(authenticateJWT, clientController.getClientById)
+  .put(authenticateJWT, clientController.updateClientInfo)
+  .delete(authenticateJWT, clientController.deleteClient);
 
-router.get("/", auth, userController.getAllUsers);
-router.get("/:id", auth, userController.getUserById);
-router.post("/email", auth, userController.getUserByEmail);
-router.put("/:id", auth, userController.updateUserProfile);
-router.delete("/:id", auth, userController.deleteUser);
-router.post("/roles", auth, userController.getUserByRole);
-
+router.get(
+  "/:id/favorite",
+  authenticateJWT,
+  clientController.getClientFavoriteService
+);
 
 module.exports = router;
