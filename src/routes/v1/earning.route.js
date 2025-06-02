@@ -1,18 +1,25 @@
-const express = require('express');
-const passport = require('passport');
-const { userController } = require("../../controllers");
+const express = require("express");
+const { earningController } = require("../../controllers");
+const authenticateJWT = require("../../middleware/authenticateJWTMiddleware");
 
 const router = express.Router();
-const auth = passport.authenticate("jwt", { session: false });
 
+// Earning routes
+router
+  .route("/")
+  .post(authenticateJWT, earningController.createEarning)
+  .get(authenticateJWT, earningController.getAllEarnings);
 
+router
+  .route("/:id")
+  .get(authenticateJWT, earningController.getEarningById)
+  .put(authenticateJWT, earningController.updateEarningInfo)
+  .delete(authenticateJWT, earningController.deleteEarning);
 
-router.get("/", auth, userController.getAllUsers);
-router.get("/:id", auth, userController.getUserById);
-router.post("/email", auth, userController.getUserByEmail);
-router.put("/:id", auth, userController.updateUserProfile);
-router.delete("/:id", auth, userController.deleteUser);
-router.post("/roles", auth, userController.getUserByRole);
-
+router.get(
+  "/technician/:id",
+  authenticateJWT,
+  earningController.getTechnicianEarnings
+);
 
 module.exports = router;
