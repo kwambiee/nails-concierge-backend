@@ -1,4 +1,4 @@
-const { technicianService } = require("../services");
+const { technicianService, serviceService } = require("../services");
 
 const createTechnician = async (req, res) => {
   try {
@@ -65,7 +65,7 @@ const getAllTechnicians = async (req, res) => {
 const getTechniciansByService = async (req, res) => {
   try {
     const serviceId = req.params.serviceId;
-    const technicians = await technicianService.getTechniciansByService(
+    const technicians = await serviceService.getTechniciansByService(
       serviceId
     );
     if (!technicians || technicians.length === 0) {
