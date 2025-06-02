@@ -2,24 +2,20 @@ const { Review } = require("../models");
 
 const createReview = async (reviewData) => {
   const {
-    name,
-    description,
-    price,
-    duration,
-    category,
-    image,
-    professional,
+    client,
+    technician,
+    rating,
+    comment,
+    service,
   } = reviewData;
   
   // Create the review
   const newReview = await Review.create({
-    name,
-    description,
-    price,
-    duration,
-    category,
-    image,
-    professional,
+    client,
+    technician,
+    rating,
+    comment,
+    service,
   });
   return newReview;
 };
@@ -30,29 +26,15 @@ const getReviewById = async (id) => {
 };
 
 const updateReviewInfo = async (reviewId, reviewInfo) => {
-  const {
-    bio,
-    rating,
-    reviews,
-    bookings,
-    notifications,
-    availability,
-    workingHours,
-    earnings,
-    isVerified,
-  } = reviewInfo;
+  const { client, technician, rating, comment, service } = reviewInfo;
   const updatedReview = await Review.findByIdAndUpdate(
     reviewId,
     {
-        bio,
-        rating,
-        reviews,
-        bookings,
-        notifications,
-        availability,
-        workingHours,
-        earnings,
-        isVerified,
+      client,
+      technician,
+      rating,
+      comment,
+      service,
     },
     { new: true }
   );
@@ -64,9 +46,9 @@ const deleteReview = async (reviewId) => {
   return deletedReview;
 }
 
-const getAllProfessionalReviews = async (professionalId) => {
-  const reviews = await Review.find({ professional: professionalId });
-  const totalReviews = await Review.countDocuments({ professional: professionalId });
+const getTechnicianReviews = async (technician) => {
+  const reviews = await Review.find(technician);
+  const totalReviews = await Review.countDocuments(technician);
   return { reviews, totalReviews };
 }
 
@@ -75,5 +57,5 @@ module.exports = {
   getReviewById,
   updateReviewInfo,
   deleteReview,
-  getAllProfessionalReviews,
+  getTechnicianReviews,
 };

@@ -10,8 +10,6 @@ const defaultRoutes = [
   },
 ];
 
-console.log("routes/index.js reached")
-
 defaultRoutes.forEach((route) => {
   router.use(route.path, route.route);
 });

@@ -1,18 +1,24 @@
-const express = require('express');
-const passport = require('passport');
-const { userController } = require("../../controllers");
+const express = require("express");
+const { reviewController } = require("../../controllers");
+const authenticateJWT = require("../../middleware/authenticateJWTMiddleware");
 
 const router = express.Router();
-const auth = passport.authenticate("jwt", { session: false });
 
+// Review routes
+router
+  .route("/")
+  .post(authenticateJWT, reviewController.createReview);
 
+router
+  .route("/:id")
+  .get(authenticateJWT, reviewController.getReviewById)
+  .put(authenticateJWT, reviewController.updateReviewInfo)
+  .delete(authenticateJWT, reviewController.deleteReview);
 
-router.get("/", auth, userController.getAllUsers);
-router.get("/:id", auth, userController.getUserById);
-router.post("/email", auth, userController.getUserByEmail);
-router.put("/:id", auth, userController.updateUserProfile);
-router.delete("/:id", auth, userController.deleteUser);
-router.post("/roles", auth, userController.getUserByRole);
-
+router.get(
+  "/technician/:id",
+  authenticateJWT,
+  reviewController.getTechnicianReviews
+);
 
 module.exports = router;

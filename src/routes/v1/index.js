@@ -20,6 +20,38 @@ const defaultRoutes = [
     path: "/users",
     route: userRoute,
   },
+  {
+    path: "/bookings",
+    route: bookingRoute,
+  },
+  {
+    path: "/services",
+    route: serviceRoute,
+  },
+  {
+    path: "/clients",
+    route: clientRoute,
+  },
+  {
+    path: "/technicians",
+    route: technicianRoute,
+  },
+  {
+    path: "/reviews",
+    route: reviewRoute,
+  },
+  {
+    path: "/earnings",
+    route: earningRoute,
+  },
+  {
+    path: "/payments",
+    route: paymentRoute,
+  },
+  {
+    path: "/notifications",
+    route: notificationRoute,
+  }
 ];
 
 defaultRoutes.forEach((route) => {

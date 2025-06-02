@@ -7,14 +7,18 @@ const reviewSchema = new mongoose.Schema(
       ref: "Client",
       required: true,
     },
-    professional: {
+    technician: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Technician",
       required: true,
     },
     rating: { type: Number, required: true, min: 1, max: 5 },
-    comment: String,
-    
+    comment: {type: String, required: true, trim: true},
+    service: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Service",
+      required: true,
+    }, 
   },
   { timestamps: true }
 );

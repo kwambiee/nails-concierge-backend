@@ -22,7 +22,7 @@ const getReviewById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-const updateReviewProfile = async (req, res) => {
+const updateReviewInfo = async (req, res) => {
   try {
     const reviewId = req.params.id;
     const reviewInfo = req.body;
@@ -45,11 +45,11 @@ const deleteReview = async (req, res) => {
   }
 };
 
-const getAllProfessionalReviews = async (req, res) => {
+const getTechnicianReviews = async (req, res) => {
   try {
-    const professionalId = req.params.id;
-    const { reviews, totalReviews } = await reviewService.getAllUserReviews(
-      professionalId
+    const technician = req.params.id;
+    const { reviews, totalReviews } = await reviewService.getTechnicianReviews(
+      technician
     );
     res.status(200).json({ reviews, totalReviews });
   } catch (error) {
@@ -59,8 +59,8 @@ const getAllProfessionalReviews = async (req, res) => {
 
 module.exports = {
   createReview,
-  updateReviewProfile,
+  updateReviewInfo,
   deleteReview,
   getReviewById,
-  getAllProfessionalReviews,
+  getTechnicianReviews,
 };
