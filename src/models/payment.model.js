@@ -7,6 +7,11 @@ const paymentSchema = new mongoose.Schema(
       ref: "Booking",
       required: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     amount: { type: Number, required: true },
     method: { type: String, enum: ["mpesa", "card", "cash"], required: true },
     transactionId: { type: String },

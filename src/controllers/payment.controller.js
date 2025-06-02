@@ -2,13 +2,29 @@ const { paymentService } = require("../services");
 
 const createPayment = async (req, res) => {
   try {
-    const paymentData = req.body;
+    const user = req.user._id;
+    const paymentData = {
+      ...req.body,
+      user,
+    };
     const newPayment = await paymentService.createPayment(paymentData);
     res.status(201).json({ payment: newPayment });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
+const getAllUserPayments = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { payments, totalPayments } = await paymentService.getAllUserPayments(
+      userId
+    );
+    res.status(200).json({ payments, totalPayments });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 
 const getPaymentById = async (req, res) => {
   try {
@@ -60,4 +76,5 @@ module.exports = {
   deletePayment,
   getPaymentById,
   getAllPayments,
+  getAllUserPayments,
 };

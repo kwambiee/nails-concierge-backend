@@ -1,7 +1,7 @@
 const { Payment } = require("../models");
 
 const createPayment = async (paymentData) => {
-  const { bookingId, amount, method, transactionId, status } = paymentData;
+  const { bookingId, amount, method, transactionId, status, user } = paymentData;
 
   // Create the payment
   const newPayment = await Payment.create({
@@ -10,6 +10,7 @@ const createPayment = async (paymentData) => {
     method,
     transactionId,
     status,
+    user
   });
   return newPayment;
 };
@@ -46,10 +47,17 @@ const getAllPayments = async () => {
   return { payments, totalPayments };
 };
 
+const getAllUserPayments = async (userId) => {
+  const payments = await Payment.find({ user: userId });
+  const totalPayments = await Payment.countDocuments({ user: userId });
+  return { payments, totalPayments };
+};
+
 module.exports = {
   createPayment,
   getPaymentById,
   updatePaymentInfo,
   deletePayment,
   getAllPayments,
+  getAllUserPayments,
 };
