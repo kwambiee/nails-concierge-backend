@@ -47,7 +47,10 @@ const deleteService = async (req, res) => {
 
 const getTechnicianServices = async (req, res) => {
   try {
-    const { services, totalServices } = await serviceService.getAllServices();
+    const technician = req.params.id;
+    const { services, totalServices } = await serviceService.getTechnicianServices(
+      technician
+    );
     res.status(200).json({ services, totalServices });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -56,13 +59,13 @@ const getTechnicianServices = async (req, res) => {
 
 const getAllServices = async (req, res) => {
   try {
-    const { services, totalServices } =
-      await serviceService.getTechnicianServices();
+    const { services, totalServices } = await serviceService.getAllServices();
     res.status(200).json({ services, totalServices });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 module.exports = {
   createService,

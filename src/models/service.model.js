@@ -8,7 +8,7 @@ const serviceSchema = new mongoose.Schema(
     duration: { type: Number }, // Duration in minutes
     category: { type: String },
     image: { type: String },
-    professional: {
+    technician: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Technician",
       required: true,
