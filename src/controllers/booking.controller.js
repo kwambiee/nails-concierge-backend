@@ -82,7 +82,6 @@ const getAllBookings = async (req, res) => {
 
 module.exports = {
   createBooking,
-  updateBookingProfile,
   deleteBooking,
   getBookingById,
   getTechnicianBookings,

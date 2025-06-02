@@ -1,2 +1,10 @@
 module.exports.authController = require("./auth.controller");
 module.exports.userController = require("./user.controller");
+module.exports.clientController = require("./client.controller");
+module.exports.earningController = require("./earning.controller");
+module.exports.bookingController = require("./booking.controller");
+module.exports.notificationController = require("./notification.controller");
+module.exports.paymentController = require("./payment.controller");
+module.exports.technicianController = require("./technician.controller");
+module.exports.serviceController = require("./service.controller");
+module.exports.reviewController = require("./review.controller");
